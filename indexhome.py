@@ -11,9 +11,11 @@ from flask_cors import *
 app = Flask(__name__)
 
 CORS(app , supports_credentials=True)
+
+
 @app.route("/")
 def indexFn():
-    return "我是index 界面"
+    return render_template("index2.html")
 
 
     
@@ -35,7 +37,7 @@ def lostPage(err):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='192.168.1.105' , port=8888)
 
 
 
