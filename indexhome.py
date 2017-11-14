@@ -9,13 +9,10 @@ import sqlite3
 from flask_cors import *
 
 app = Flask(__name__)
-
 CORS(app , supports_credentials=True)
-
-
 @app.route("/")
 def indexFn():
-    return render_template("index2.html")
+    return "我是index 界面"
 
 
     
@@ -37,7 +34,7 @@ def lostPage(err):
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.1.105' , port=8888)
+    app.run(host='192.168.1.33' , port=5678)
 
 
 
