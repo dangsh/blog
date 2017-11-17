@@ -32,8 +32,11 @@ def get_value_with_fallback(key):
         return request.cookies.get(key)
     return DEFAULTS[key]
 
-
 @app.route('/')
+def index():
+    return render_template("index2.html")
+
+@app.route('/top')
 def home():
     publication = get_value_with_fallback('publication')
     city = get_value_with_fallback('city')
@@ -69,4 +72,4 @@ def get_weather(city):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='192.168.1.33', port=5678, debug=True)
