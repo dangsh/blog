@@ -37,7 +37,7 @@ def lostPage(err):
 
 
 if __name__ == "__main__":
-    app.run(host='192.168.1.33' , port=5678)
+    app.run(host='0.0.0.0' , port=5678)
 
 
 
