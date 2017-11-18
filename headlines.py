@@ -34,7 +34,7 @@ def get_value_with_fallback(key):
 
 @app.route('/')
 def index():
-    return render_template("index2.html")
+    return render_template("index3.html")
 
 @app.route('/top')
 def home():
