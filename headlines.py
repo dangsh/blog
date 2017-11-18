@@ -13,11 +13,22 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
             "netease": "http://news.163.com/special/00011K6L/rss_newsattitude.xml",
             "songshuhui": "http://songshuhui.net/feed",
             "t1": "http://news.qq.com/newsgn/rss_newsgn.xml" ,
-            "s1": "http://rss.sina.com.cn/news/china/focus15.xml" ,
+            "t2": "http://news.qq.com/newsgj/rss_newswj.xml",
+            "s1":"http://rss.sina.com.cn/news/china/focus15.xml" ,
             "s2":"http://rss.sina.com.cn/news/world/focus15.xml" ,
-            "s3":"http://rss.sina.com.cn/news/world/focus15.xml" ,
-            "fankexue" : "http://pansci.asia/feed" 
-
+            "fankexue" : "http://pansci.asia/feed" ,
+            "r1" : "http://www.people.com.cn/rss/politics.xml" ,
+            "r2" : "http://www.people.com.cn/rss/world.xml" ,
+            "w1" : "http://news.163.com/special/00011K6L/rss_newstop.xml" ,
+            "k1" : "http://www.sciencenet.cn/xml/news-0.aspx?news=0",
+            "k2" : "http://www.sciencenet.cn/xml/news-0.aspx?di=0" ,
+            "k3" : "http://www.sciencenet.cn/xml/news-0.aspx?di=1" ,
+            "k4" : "http://www.sciencenet.cn/xml/news-0.aspx?di=7" ,
+            "b1" : "http://news.baidu.com/n?cmd=1&class=civilnews&tn=rss" ,
+            "b2" : "http://news.baidu.com/n?cmd=1&class=internews&tn=rss" ,
+            "b3" : "http://news.baidu.com/n?cmd=1&class=mil&tn=rss" ,
+            "souhu1" : "http://rss.news.sohu.com/rss/guonei.xml" ,
+            "souhu2" : "http://rss.news.sohu.com/rss/guoji.xml"
             }
 
 DEFAULTS = {'city': '北京',
@@ -46,6 +57,12 @@ def lostPage(err):
     # return redirect(url_for("indexFn"))
     return "我是404界面"
 
+@app.route('/about')
+def aboutFn():
+    return render_template("about.html")
+
+
+
 @app.route('/top')
 def home():
     publication = get_value_with_fallback('publication')
@@ -54,7 +71,7 @@ def home():
     weather = get_weather(city) #获得天气
     articles = get_news(publication) #获得头条数据
 
-    response = make_response(render_template('home1.html', articles=articles,
+    response = make_response(render_template('top.html', articles=articles,
                                              weather=weather))
 
     expires = datetime.datetime.now() + datetime.timedelta(days=365)
