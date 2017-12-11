@@ -80,6 +80,9 @@ def home():
 
     return response
 
+@app.route('/delSpace')
+def delSpaceFn():
+    return render_template("delSpace.html")
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
