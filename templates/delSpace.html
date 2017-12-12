@@ -10,37 +10,79 @@
 		<meta name="author" content="">
 		<link rel="icon" href="../../favicon.ico">
 
-		<title>Jumbotron Template for Bootstrap</title>
+		<title>Dangsh's</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="jumbotron.css" rel="stylesheet">
 
 		<style type="text/css">
 			.myinput {
 				height: 400px;
 				width: 100%;
 			}
-			a{
+			
+			.btn-default {
 				margin-top: 5px;
 			}
-			
 		</style>
 	</head>
 
 	<body>
 
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-fixed-top navbar-inverse">
 			<div class="container">
 				<div class="navbar-header">
-
-					<a class="navbar-brand" href="#">删除空格</a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		            <span class="sr-only">Toggle navigation</span>
+		    		<span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+          			</button>
+					<a class="navbar-brand" href="../">dangsh's</a>
 				</div>
-
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/about">About</a>
+						</li>
+						<li>
+							<a href="#contact">Contact</a>
+						</li>
+						<li>
+							<a href="/top">Headlines</a>
+						</li>
+						<li class="dropdown active">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/delSpace">DelSpace</a>
+								</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li class="dropdown-header">Empty Tools</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.nav-collapse -->
 			</div>
+			<!-- /.container -->
 		</nav>
-
-		
+		<!-- /.navbar -->
 
 		<div class="container">
 			<!-- Example row of columns -->
@@ -69,7 +111,7 @@
 			<script src="../static/js/jquery.js"></script>
 			<script src="../static/js/bootstrap.min.js"></script>
 			<script src="../static/layer/layer.js"></script>
-			
+
 			<script type="text/javascript">
 				$(".changeBtn").click(function() {
 					var text1 = $("#text1").val()
@@ -80,7 +122,7 @@
 					text1 = text1.replace(/\s/g, "");
 					document.getElementById('text2').value = text1
 				})
-								
+
 				$(".changeBtn2").click(function() {
 					var text1 = $("#text1").val()
 					//替换所有的换行符
@@ -95,21 +137,18 @@
 					document.getElementById('text1').value = ""
 					document.getElementById('text2').value = ""
 				})
-				
+
 				$(".copyBtn").click(function() {
 					copyTextAreaCt()
 				})
-				function copyTextAreaCt()
-					{
-						var oContent=document.getElementById("text2");
-						oContent.select(); // 选择对象
-						document.execCommand("Copy"); // 执行浏览器复制命令
-						layer.msg('复制成功');
-					}
-		
+
+				function copyTextAreaCt() {
+					var oContent = document.getElementById("text2");
+					oContent.select(); // 选择对象
+					document.execCommand("Copy"); // 执行浏览器复制命令
+					layer.msg('复制成功');
+				}
 			</script>
 	</body>
 
 </html>
-
-
