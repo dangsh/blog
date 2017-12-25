@@ -32,7 +32,7 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
             }
 
 DEFAULTS = {'city': '北京',
-            'publication': 'ifeng'}
+            'publication': 'souhu2'}
 
 WEATHERS = {"北京": 101010100,
             "上海": 101020100,

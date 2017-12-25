@@ -93,6 +93,7 @@
 					<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
 					<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">完全去空格 &raquo;</a>
 					<a class="btn btn-default changeBtn2" href="#" role="button" style="margin-left: 10px;">保留单空格 &raquo;</a>
+					<a class="btn btn-default changeBtn3" href="#" role="button" style="margin-left: 10px;">删除多于一个的换行 &raquo;</a>
 				</div>
 				<div class="col-md-6">
 					<h2>删除空格</h2>
@@ -128,8 +129,16 @@
 					//替换所有的换行符
 					text1 = text1.replace(/\r\n/g, "")
 					text1 = text1.replace(/\n/g, "");
-					//替换所有的空格（中文空格、英文空格都会被替换）
+					//替换多于一个的空格（中文空格、英文空格都会被替换）
 					text1 = text1.replace(/\s+/g, ' ');
+					document.getElementById('text2').value = text1
+				})
+
+				$(".changeBtn3").click(function() {
+					var text1 = $("#text1").val()
+					//替换所有的换行符
+					text1 = text1.replace(/\r+\n+/g, "\r")
+					text1 = text1.replace(/\n+/g, "\n");
 					document.getElementById('text2').value = text1
 				})
 
