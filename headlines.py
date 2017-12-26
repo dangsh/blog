@@ -5,7 +5,7 @@ import datetime
 import requests
 import feedparser
 from flask import Flask, render_template, request, make_response
-
+from song import getMusicInfo
 
 app = Flask(__name__)
 
@@ -83,6 +83,23 @@ def home():
 @app.route('/delSpace')
 def delSpaceFn():
     return render_template("delSpace.html")
+
+@app.route('/music')
+def musicFn():
+    name = get_value_with_fallback('publication')
+    print(name)
+    info  = getMusicInfo(name)
+    print(info[0])
+    response = make_response(render_template('music.html' , info=info))
+    return response
+
+@app.route('/musicImp')
+def musicImpFn():
+    music_info  = getMusicInfo('周星驰')
+    print(music_info[0])
+    response = make_response(render_template('music.html'))
+    return response
+    
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
