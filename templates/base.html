@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="../../favicon.ico">
+		<title>dangsh's</title>
+		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+		{% block css %}{% endblock %}
+	</head>
+
+	<body>
+		<nav class="navbar navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="../">dangsh's</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/about">About</a>
+						</li>
+						<li>
+							<a href="#contact">Contact</a>
+						</li>
+						<li class="active">
+							<a href="/top">Headlines</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/delSpace">DelSpace</a>
+								</li>
+								<li>
+									<a href="/music">Music</a>
+								</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li class="dropdown-header">Empty Tools</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+								<li>
+									<a href="#">Empty Tools</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.nav-collapse -->
+			</div>
+			<!-- /.container -->
+		</nav>
+		<!-- /.navbar -->
+
+		<div class="container">
+			<!--内容区域-->
+			{% block content %}{% endblock %}
+			<hr />
+			<footer>
+				<p>&copy; Company 2017</p>
+			</footer>
+		</div>
+		<!--/.container-->
+		<script src="../static/js/jquery.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		{% block script %}{% endblock %}
+	</body>
+
+</html>

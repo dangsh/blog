@@ -1,163 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block content %}
+<div class="row" style="margin-top: 50px;">
+	<div class="col-md-6">
+		<h2>原文字</h2>
+		<textarea id="text1" class="form-control myinput" rows="20" name=textarea></textarea>
+		<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
+		<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">完全去空格 &raquo;</a>
+		<a class="btn btn-default changeBtn2" href="#" role="button" style="margin-left: 10px;">保留单空格 &raquo;</a>
+		<a class="btn btn-default changeBtn3" href="#" role="button" style="margin-left: 10px;">删除多于一个的换行 &raquo;</a>
+	</div>
+	<div class="col-md-6">
+		<h2>删除空格</h2>
+		<textarea id="text2" class="form-control myinput" rows="20" name=textarea></textarea>
+		<a class="btn btn-default copyBtn" href="#" role="button">复制内容</a>
+	</div>
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../../favicon.ico">
+	<hr /> 
 
-		<title>Dangsh's</title>
+</div>
+{% endblock %} {% block script %}
+<script src="../static/layer/layer.js"></script>
 
-		<!-- Bootstrap core CSS -->
-		<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript">
+	$(".changeBtn").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+		text1 = text1.replace(/\r\n/g, "")
+		text1 = text1.replace(/\n/g, "");
+		//替换所有的空格（中文空格、英文空格都会被替换）
+		text1 = text1.replace(/\s/g, "");
+		document.getElementById('text2').value = text1
+	})
 
-		<style type="text/css">
-			.myinput {
-				height: 400px;
-				width: 100%;
-			}
-			
-			.btn-default {
-				margin-top: 5px;
-			}
-		</style>
-	</head>
+	$(".changeBtn2").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+		text1 = text1.replace(/\r\n/g, "")
+		text1 = text1.replace(/\n/g, "");
+		//替换多于一个的空格（中文空格、英文空格都会被替换）
+		text1 = text1.replace(/\s+/g, ' ');
+		document.getElementById('text2').value = text1
+	})
 
-	<body>
+	$(".changeBtn3").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+		text1 = text1.replace(/\r+\n+/g, "\r")
+		text1 = text1.replace(/\n+/g, "\n");
+		document.getElementById('text2').value = text1
+	})
 
-		<nav class="navbar navbar-fixed-top navbar-inverse">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		            <span class="sr-only">Toggle navigation</span>
-		    		<span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-          			</button>
-					<a class="navbar-brand" href="../">dangsh's</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="/">Home</a>
-						</li>
-						<li>
-							<a href="/about">About</a>
-						</li>
-						<li>
-							<a href="#contact">Contact</a>
-						</li>
-						<li>
-							<a href="/top">Headlines</a>
-						</li>
-						<li class="dropdown active">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="/delSpace">DelSpace</a>
-								</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li class="dropdown-header">Empty Tools</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<!-- /.nav-collapse -->
-			</div>
-			<!-- /.container -->
-		</nav>
-		<!-- /.navbar -->
+	$(".clearBtn").click(function() {
+		document.getElementById('text1').value = ""
+		document.getElementById('text2').value = ""
+	})
 
-		<div class="container">
-			<!-- Example row of columns -->
-			<div class="row" style="margin-top: 50px;">
-				<div class="col-md-6">
-					<h2>原文字</h2>
-					<textarea id="text1" class="form-control myinput" rows="20" name=textarea></textarea>
-					<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
-					<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">完全去空格 &raquo;</a>
-					<a class="btn btn-default changeBtn2" href="#" role="button" style="margin-left: 10px;">保留单空格 &raquo;</a>
-					<a class="btn btn-default changeBtn3" href="#" role="button" style="margin-left: 10px;">删除多于一个的换行 &raquo;</a>
-				</div>
-				<div class="col-md-6">
-					<h2>删除空格</h2>
-					<textarea id="text2" class="form-control myinput" rows="20" name=textarea></textarea>
-					<a class="btn btn-default copyBtn" href="#" role="button">复制内容</a>
-				</div>
+	$(".copyBtn").click(function() {
+		copyTextAreaCt()
+	})
 
-				<hr>
-
-			</div>
-			<!-- /container -->
-
-			<!-- Bootstrap core JavaScript
-    ================================================== -->
-			<!-- Placed at the end of the document so the pages load faster -->
-			<script src="../static/js/jquery.js"></script>
-			<script src="../static/js/bootstrap.min.js"></script>
-			<script src="../static/layer/layer.js"></script>
-
-			<script type="text/javascript">
-				$(".changeBtn").click(function() {
-					var text1 = $("#text1").val()
-					//替换所有的换行符
-					text1 = text1.replace(/\r\n/g, "")
-					text1 = text1.replace(/\n/g, "");
-					//替换所有的空格（中文空格、英文空格都会被替换）
-					text1 = text1.replace(/\s/g, "");
-					document.getElementById('text2').value = text1
-				})
-
-				$(".changeBtn2").click(function() {
-					var text1 = $("#text1").val()
-					//替换所有的换行符
-					text1 = text1.replace(/\r\n/g, "")
-					text1 = text1.replace(/\n/g, "");
-					//替换多于一个的空格（中文空格、英文空格都会被替换）
-					text1 = text1.replace(/\s+/g, ' ');
-					document.getElementById('text2').value = text1
-				})
-
-				$(".changeBtn3").click(function() {
-					var text1 = $("#text1").val()
-					//替换所有的换行符
-					text1 = text1.replace(/\r+\n+/g, "\r")
-					text1 = text1.replace(/\n+/g, "\n");
-					document.getElementById('text2').value = text1
-				})
-
-				$(".clearBtn").click(function() {
-					document.getElementById('text1').value = ""
-					document.getElementById('text2').value = ""
-				})
-
-				$(".copyBtn").click(function() {
-					copyTextAreaCt()
-				})
-
-				function copyTextAreaCt() {
-					var oContent = document.getElementById("text2");
-					oContent.select(); // 选择对象
-					document.execCommand("Copy"); // 执行浏览器复制命令
-					layer.msg('复制成功');
-				}
-			</script>
-	</body>
-
-</html>
+	function copyTextAreaCt() {
+		var oContent = document.getElementById("text2");
+		oContent.select(); // 选择对象
+		document.execCommand("Copy"); // 执行浏览器复制命令
+		layer.msg('复制成功');
+	}
+</script>
+{% endblock %}

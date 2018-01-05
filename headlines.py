@@ -61,8 +61,6 @@ def lostPage(err):
 def aboutFn():
     return render_template("about.html")
 
-
-
 @app.route('/top')
 def home():
     publication = get_value_with_fallback('publication')
@@ -87,9 +85,7 @@ def delSpaceFn():
 @app.route('/music')
 def musicFn():
     name = get_value_with_fallback('publication')
-    print(name)
     info  = getMusicInfo(name)
-    print(info[0])
     response = make_response(render_template('music.html' , info=info))
     return response
 
@@ -99,7 +95,10 @@ def musicImpFn():
     print(music_info[0])
     response = make_response(render_template('music.html'))
     return response
-    
+
+@app.route('/base')
+def baseFn():
+    return render_template("base.html")  
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
