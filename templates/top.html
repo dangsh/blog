@@ -37,7 +37,6 @@
 
 		<div class="col-xs-3 col-sm-3 sidebar-offcanvas" id="sidebar" style="margin-top: 100px;">
 			<div class="list-group">
-				
 				<a href="?publication=t1" class="list-group-item">腾讯国内新闻</a>
 				<a href="#" class="list-group-item">腾讯国际新闻</a>
 				<a href="?publication=s1" class="list-group-item">新浪国内新闻</a>
@@ -64,5 +63,15 @@
 		<!--/.sidebar-offcanvas-->
 	</div>
 	<!--/row-->
+	
+{% endblock %}
+{% block script %}
+	<script type="text/javascript">
+		$('.list-group').find('a').each(function() {
+				if(this.href == document.location.href) {
+					$(this).addClass('active');
+				}
+			});
+	</script>
 {% endblock %}
 			
