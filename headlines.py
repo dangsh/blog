@@ -100,6 +100,19 @@ def musicImpFn():
 def baseFn():
     return render_template("base.html")  
 
+@app.route('/login')
+def loginFn():
+    return render_template("login.html")
+
+@app.route('/loginCheck' , methods=['GET', 'POST'])
+def loginCheckFn():
+    username = request.form.get('username','111')
+    password = request.form.get('password','222')
+    print(username , password)
+    if username == "zxg" and password == "123456":
+        return render_template("manage.html")
+    else:
+        return render_template("login.html")
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
     return feed['entries']
