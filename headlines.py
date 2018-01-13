@@ -6,6 +6,7 @@ import requests
 import feedparser
 from flask import Flask, render_template, request, make_response
 from song import getMusicInfo
+from linkdb import *
 
 app = Flask(__name__)
 
@@ -113,6 +114,12 @@ def loginCheckFn():
         return render_template("manage.html")
     else:
         return render_template("login.html")
+
+@app.route('/msgAdd' , methods=['GET', 'POST'])
+def msgAddFn():
+    msgAdd('222' , '333' , '444')
+    return "添加成功"
+
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
     return feed['entries']
