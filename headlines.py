@@ -120,6 +120,11 @@ def msgAddFn():
     msgAdd('222' , '333' , '444')
     return "添加成功"
 
+@app.route('/msgSelect' , methods=['GET', 'POST'])
+def msgSelectFn():
+    msgSelect()
+    return "查找成功"
+
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
     return feed['entries']

@@ -20,6 +20,22 @@ def msgAdd(a , b , c):
             cursor.execute(sql, (a , b , c));
         # 没有设置默认自动提交，需要主动提交，以保存所执行的语句
         connection.commit()
-    
     finally:
         connection.close();
+
+def msgSelect():
+    allUsertables = []
+    try:
+        with connection.cursor() as cursor:
+            sql = 'select title , shortmsg , msg from blog1'
+            cursor.execute(sql);
+            for row in cursor.fetchall():
+                allUsertables.append(row)
+                cursor.close();
+            print(allUsertables)
+           
+        connection.commit()
+    except:
+        print("select error")
+    # finally:
+    #     connection.close();
