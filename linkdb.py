@@ -31,11 +31,10 @@ def msgSelect():
             cursor.execute(sql);
             for row in cursor.fetchall():
                 allUsertables.append(row)
-                cursor.close();
-            print(allUsertables)
-           
         connection.commit()
     except:
         print("select error")
+
+    return allUsertables
     # finally:
     #     connection.close();

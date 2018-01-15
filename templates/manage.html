@@ -58,7 +58,28 @@
 
 {% block script %}
 <script type="text/javascript">
-	var ele = '<div class="col-xs-12 col-lg-12"> <h2>四四四</h2> <p>There is neither happiness nor misery in the world; there is only the comparison of one state with another,nothing more.He who has felt the deepest grief is best able to experience supreme happiness.We must have felt what it is to die,Morrel,that we may appreciate the enjoyments of living. </p> <p> <a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a> </p> </div>'
-	$("#contentdiv").append(ele)
+	function loaddata() {
+		$.ajax({
+			url: "http://localhost:5678/msgSelect",
+			success: function (data) {
+				jsonData = JSON.parse(data)
+				for(var a=0;a<jsonData.length;a++){
+					title = jsonData[a].title
+					shortmsg = jsonData[a].shortmsg
+					msg = jsonData[a].msg
+					var ele = '<div class="col-xs-12 col-lg-12"> <h2>'+ title +'</h2> <p>'+ shortmsg +' </p> <p> <a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a> </p> </div>'
+					$("#contentdiv").append(ele)
+				}
+				
+				
+			},
+			error: function (msg) {
+				console.log("error:获取数据失败")
+			}
+		});
+	}
+	loaddata()
+		
+	
 </script>
 {% endblock %}

@@ -7,6 +7,7 @@ import feedparser
 from flask import Flask, render_template, request, make_response
 from song import getMusicInfo
 from linkdb import *
+import json
 
 app = Flask(__name__)
 
@@ -122,8 +123,9 @@ def msgAddFn():
 
 @app.route('/msgSelect' , methods=['GET', 'POST'])
 def msgSelectFn():
-    msgSelect()
-    return "查找成功"
+    msg = msgSelect()
+    msg = json.dumps(msg)
+    return msg
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
