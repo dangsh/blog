@@ -116,9 +116,16 @@ def loginCheckFn():
     else:
         return render_template("login.html")
 
+@app.route('/addmsg' , methods=['GET' , 'POST'])
+def addmsgFn():
+    return render_template("addmsg.html")
+
 @app.route('/msgAdd' , methods=['GET', 'POST'])
 def msgAddFn():
-    msgAdd('222' , '333' , '444')
+    title = request.form.get('title','111')
+    shortmsg = request.form.get('shortmsg','222')
+    msg = request.form.get('msg','111')
+    msgAdd(title , shortmsg , msg)
     return "添加成功"
 
 @app.route('/msgSelect' , methods=['GET', 'POST'])

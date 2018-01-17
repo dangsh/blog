@@ -20,8 +20,9 @@ def msgAdd(a , b , c):
             cursor.execute(sql, (a , b , c));
         # 没有设置默认自动提交，需要主动提交，以保存所执行的语句
         connection.commit()
-    finally:
-        connection.close();
+
+    except:
+        print("add error")
 
 def msgSelect():
     allUsertables = []
