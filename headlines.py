@@ -84,6 +84,10 @@ def home():
 def delSpaceFn():
     return render_template("delSpace.html")
 
+@app.route('/delChar')
+def delCharFn():
+    return render_template("delChar.html")
+
 @app.route('/music')
 def musicFn():
     name = get_value_with_fallback('publication')
