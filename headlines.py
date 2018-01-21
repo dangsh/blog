@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+#-*-coding:utf-8 -*-
 from __future__ import unicode_literals
 import datetime
 import requests
@@ -135,6 +135,8 @@ def msgAddFn():
 @app.route('/msgSelect' , methods=['GET', 'POST'])
 def msgSelectFn():
     msg = msgSelect()
+    
+    print(msg)
     msg = json.dumps(msg)
     return msg
 

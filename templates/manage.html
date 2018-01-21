@@ -14,7 +14,7 @@
 				<p>There is neither happiness nor misery in the world; there is only the comparison of one state with another,nothing more.He who has felt the deepest grief is best able to experience supreme happiness.We must have felt what it is to die,Morrel,that we may appreciate the enjoyments of living. </p>
 				<p>
 					<a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a>
-					<a class="btn btn-default" href="#" role="button">删除 &raquo;</a>
+					<a class="btn btn-default delBtn" href="#" role="button" id="delId">删除 &omega;</a>
 				</p>
 			</div>
 			<!--/.col-xs-6.col-lg-4-->
@@ -45,14 +45,25 @@
 		$.ajax({
 			url: "http://localhost:5678/msgSelect",
 			success: function(data) {
+				console.log(data)
 				jsonData = JSON.parse(data)
 				for(var a = 0; a < jsonData.length; a++) {
+					id = jsonData[a].id
 					title = jsonData[a].title
 					shortmsg = jsonData[a].shortmsg
 					msg = jsonData[a].msg
-					var ele = '<div class="col-xs-12 col-lg-12"> <h2>' + title + '</h2> <p>' + shortmsg + ' </p> <p> <a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a> <a class="btn btn-default" href="#" role="button">删除 &raquo;</a></p> </div>'
+					var ele = '<div id="' + id + '"  class="col-xs-12 col-lg-12"> <h2>' + title + '</h2> <p>' + shortmsg + ' </p> <p> <a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a> <a class="btn btn-default delBtn" href="#" role="button" id="delId">删除 &omega;</a></p> </div>'
 					$("#contentdiv").append(ele)
+					
+					
 				}
+				$(".delBtn").click(function(){
+						console.log("-------")
+						console.log($(this).parents("div")[0])
+						var a = $(this).parents("div").attr("id")
+						console.log(a)
+						$(this).parents("div")[0].remove()
+					})
 
 			},
 			error: function(msg) {
@@ -61,5 +72,6 @@
 		});
 	}
 	loaddata()
+	
 </script>
 {% endblock %}

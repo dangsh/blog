@@ -1,3 +1,5 @@
+#!/usr/bin/python
+#-*-coding:utf-8 -*-
 import pymysql.cursors
  
 config = {
@@ -7,6 +9,7 @@ config = {
           'password':'5801200zxg',
           'db':'blog',
           'cursorclass':pymysql.cursors.DictCursor,
+          'charset':'utf8'
           }
  
 # Connect to the database
@@ -28,7 +31,7 @@ def msgSelect():
     allUsertables = []
     try:
         with connection.cursor() as cursor:
-            sql = 'select title , shortmsg , msg from blog1'
+            sql = 'select id , title , shortmsg , msg from blog1'
             cursor.execute(sql);
             for row in cursor.fetchall():
                 allUsertables.append(row)
