@@ -1,83 +1,74 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="{% extends "base.html" %}
-{% block content %}
-<div class="row" style="margin-top: 50px;">
-	<form class="form-signin" method="post" action="http://localhost:5678/loginCheck">
-				<h2 class="form-signin-heading">删除特定的字符</h2>
-				<h4 class="form-signin-heading">输入需要删除的字符</h4>
-				<input type="text" name="username" class="form-control" required autofocus style="margin-top: 20px;">
-				<button class="btn btn-lg btn-primary btn-block" type="submit" id="login" style="margin-top: 15px;">登录</button>
-	</form>
-	<div class="col-md-6">
-		<h2>原文字</h2>
-		<textarea id="text1" class="form-control myinput" rows="20" name=textarea></textarea>
-		<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
-		<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">完全去空格 &raquo;</a>
-		<a class="btn btn-default changeBtn2" href="#" role="button" style="margin-left: 10px;">保留单空格 &raquo;</a>
-		<a class="btn btn-default changeBtn3" href="#" role="button" style="margin-left: 10px;">删除多于一个的换行 &raquo;</a>
+{% extends "base.html" %}{% block content %}
+<div class="row ">
+	<div class="col-md-3 " style="margin-top: 40px;">
+			<h2 class="form-signin-heading ">替换特定的字符</h2>
+			<h4 class="form-signin-heading ">输入被替换的字符</h4>
+			<input id="oldchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
+			
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-3 " style="margin-top: 40px;">
+			<h2 class="form-signin-heading ">|</h2>
+			<h4 class="form-signin-heading ">输入替换成的字符</h4>
+			<input id="newchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
+			
+	</div>
+	<!--<div class="col-md-2 " style="margin-top: 138px;">
+		<button class="btn btn-lg btn-primary btn-block " type="button" id="okBtn" style="height: 40px;">确定</button>
+	</div>-->
+</div>
+<div class="row " style="margin-top: 50px; ">
+	
+	<div class="col-md-6 ">
+		<h2>原文字</h2>
+		<textarea id="text1 " class="form-control myinput " rows="20 " name=textarea></textarea>
+		<a class="btn btn-default clearBtn " href="# " role="button ">清空 </a>
+		<a class="btn btn-default changeOneBtn " href="# " role="button " style="margin-left: 10px; ">替换首个 &raquo;</a>
+		<a class="btn btn-default changeBtn " href="# " role="button " style="margin-left: 10px; ">完全替换 &raquo;</a>
+	</div>
+	<div class="col-md-6 ">
 		<h2>删除字符</h2>
-		<textarea id="text2" class="form-control myinput" rows="20" name=textarea></textarea>
-		<a class="btn btn-default copyBtn" href="#" role="button">复制内容</a>
+		<textarea id="text2 " class="form-control myoutput" rows="20 " name=textarea></textarea>
+		<a class="btn btn-default copyBtn " href="# " role="button ">复制内容</a>
 	</div>
 
 	<hr /> 
 
 </div>
 {% endblock %} {% block script %}
-<script src="../static/layer/layer.js"></script>
+<script src="../static/layer/layer.js "></script>
 
-<script type="text/javascript">
-	$(".changeBtn").click(function() {
-		var text1 = $("#text1").val()
-		//替换所有的换行符
-		text1 = text1.replace(/\r\n/g, "")
-		text1 = text1.replace(/\n/g, "");
-		//替换所有的空格（中文空格、英文空格都会被替换）
-		text1 = text1.replace(/\s/g, "");
-		document.getElementById('text2').value = text1
+<script type="text/javascript ">
+	$(".changeOneBtn").click(function(){
+		var text1 = $(".myinput").val()
+		var oldchar = $("#oldchar ").val()
+		var newchar = $("#newchar ").val()
+		text1 = text1.replace(oldchar, newchar);
+		document.getElementsByClassName('myoutput')[0].value = text1
+	})
+	$(".changeBtn").click(function(){
+		var text1 = $(".myinput").val()
+		var oldchar = $("#oldchar ").val()
+		var newchar = $("#newchar ").val()
+		console.log(oldchar)
+		var text2 = text1.replace(new RegExp(oldchar,'g'),newchar);
+		document.getElementsByClassName('myoutput')[0].value = text2
+
 	})
 
-	$(".changeBtn2").click(function() {
-		var text1 = $("#text1").val()
-		//替换所有的换行符
-		text1 = text1.replace(/\r\n/g, "")
-		text1 = text1.replace(/\n/g, "");
-		//替换多于一个的空格（中文空格、英文空格都会被替换）
-		text1 = text1.replace(/\s+/g, ' ');
-		document.getElementById('text2').value = text1
+	$(".clearBtn ").click(function() {
+		document.getElementsByClassName('myoutput')[0].value = " "
+		document.getElementsByClassName('myinput')[0].value = " "
 	})
 
-	$(".changeBtn3").click(function() {
-		var text1 = $("#text1").val()
-		//替换所有的换行符
-		text1 = text1.replace(/\r+\n+/g, "\r")
-		text1 = text1.replace(/\n+/g, "\n");
-		document.getElementById('text2').value = text1
-	})
-
-	$(".clearBtn").click(function() {
-		document.getElementById('text1').value = ""
-		document.getElementById('text2').value = ""
-	})
-
-	$(".copyBtn").click(function() {
+	$(".copyBtn ").click(function() {
 		copyTextAreaCt()
 	})
 
 	function copyTextAreaCt() {
-		var oContent = document.getElementById("text2");
+		var oContent = document.getElementById("text2 ");
 		oContent.select(); // 选择对象
 		document.execCommand("Copy"); // 执行浏览器复制命令
 		layer.msg('复制成功');
 	}
 </script>
-{% endblock %}UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+{% endblock %}
