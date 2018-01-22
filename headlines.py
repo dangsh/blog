@@ -6,7 +6,7 @@ import requests
 import feedparser
 from flask import Flask, render_template, request, make_response
 from song import getMusicInfo
-from linkdb import *
+import linkdb
 import json
 
 app = Flask(__name__)
@@ -33,13 +33,8 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
             "souhu2" : "http://rss.news.sohu.com/rss/guoji.xml"
             }
 
-DEFAULTS = {'city': '北京',
-            'publication': 'souhu2'}
+DEFAULTS = {'publication': 'souhu2'}
 
-WEATHERS = {"北京": 101010100,
-            "上海": 101020100,
-            "广州": 101280101,
-            "深圳": 101280601}
 
 
 def get_value_with_fallback(key):
@@ -66,18 +61,9 @@ def aboutFn():
 @app.route('/top')
 def home():
     publication = get_value_with_fallback('publication')
-    city = get_value_with_fallback('city')
-
-    weather = get_weather(city) #获得天气
     articles = get_news(publication) #获得头条数据
-
-    response = make_response(render_template('top.html', articles=articles,
-                                             weather=weather))
-
-    expires = datetime.datetime.now() + datetime.timedelta(days=365)
-    response.set_cookie('publication',  publication, expires=expires)
-    response.set_cookie('city',  city, expires=expires)
-
+    response = make_response(render_template('top.html', articles=articles,))
+    response.set_cookie('publication',  publication)
     return response
 
 @app.route('/delSpace')
@@ -98,7 +84,6 @@ def musicFn():
 @app.route('/musicImp')
 def musicImpFn():
     music_info  = getMusicInfo('周星驰')
-    print(music_info[0])
     response = make_response(render_template('music.html'))
     return response
 
@@ -129,32 +114,27 @@ def msgAddFn():
     title = request.form.get('title','111')
     shortmsg = request.form.get('shortmsg','222')
     msg = request.form.get('msg','111')
-    msgAdd(title , shortmsg , msg)
+    linkdb.msgAdd(title , shortmsg , msg)
     return "添加成功"
 
 @app.route('/msgSelect' , methods=['GET', 'POST'])
 def msgSelectFn():
-    msg = msgSelect()
-    
-    print(msg)
+    msg = linkdb.msgSelect()
     msg = json.dumps(msg)
     return msg
+
+@app.route('/msgDel' , methods=['GET', 'POST'])
+def msgDelFn():
+    id = request.args.get('id') 
+    linkdb.msgDel(id)
+    return "删除成功"
+    
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])
     return feed['entries']
 
 
-def get_weather(city):
-    code = WEATHERS.get(city, 101010100)
-    url = "http://www.weather.com.cn/data/sk/{0}.html".format(code)
-
-    r = requests.get(url)
-    r.encoding = 'utf-8'
-
-    data = r.json()['weatherinfo']
-    return dict(city=data['city'], temperature=data['temp'],
-                description=data['WD'])
 
 
 if __name__ == '__main__':

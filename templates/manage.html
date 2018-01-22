@@ -41,6 +41,18 @@
 <!--/row-->
 {% endblock %} {% block script %}
 <script type="text/javascript">
+	function msgDel(id){
+		$.ajax({
+			url: "http://localhost:5678/msgDel?id="+ id,
+			method:'get',
+			success: function(data) {
+				console.log(data)
+			},
+			error: function(msg) {
+				console.log("error:删除数据失败")
+			}
+		});
+	}
 	function loaddata() {
 		$.ajax({
 			url: "http://localhost:5678/msgSelect",
@@ -62,6 +74,7 @@
 						console.log($(this).parents("div")[0])
 						var a = $(this).parents("div").attr("id")
 						console.log(a)
+						msgDel(a)
 						$(this).parents("div")[0].remove()
 					})
 

@@ -27,6 +27,18 @@ def msgAdd(a , b , c):
     except:
         print("add error")
 
+def msgDel(id):
+    try:
+        with connection.cursor() as cursor:
+            # 执行sql语句，插入记录
+            sql = 'DELETE FROM blog1 where id = ' + id
+            cursor.execute(sql);
+        # 没有设置默认自动提交，需要主动提交，以保存所执行的语句
+        connection.commit()
+
+    except:
+        print("add error")
+
 def msgSelect():
     allUsertables = []
     try:
