@@ -64,7 +64,7 @@
 					title = jsonData[a].title
 					shortmsg = jsonData[a].shortmsg
 					msg = jsonData[a].msg
-					var ele = '<div id="' + id + '"  class="col-xs-12 col-lg-12"> <h2>' + title + '</h2> <p>' + shortmsg + ' </p> <p> <a class="btn btn-default" href="#" role="button">查看详情 &raquo;</a> <a class="btn btn-default delBtn" href="#" role="button" id="delId">删除 &omega;</a></p> </div>'
+					var ele = '<div id="' + id + '"  class="col-xs-12 col-lg-12"> <h2>' + title + '</h2> <p>' + shortmsg + ' </p> <p> <a class="btn btn-default" href="/content?id=' + id +'" role="button">查看详情 &raquo;</a> <a class="btn btn-default delBtn" href="#" role="button" id="delId">删除 &omega;</a></p> </div>'
 					$("#contentdiv").append(ele)
 					
 					
