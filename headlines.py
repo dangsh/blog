@@ -115,11 +115,18 @@ def msgAddFn():
     shortmsg = request.form.get('shortmsg','222')
     msg = request.form.get('msg','111')
     linkdb.msgAdd(title , shortmsg , msg)
-    return "添加成功"
+    return render_template("manage.html")
 
 @app.route('/msgSelect' , methods=['GET', 'POST'])
 def msgSelectFn():
     msg = linkdb.msgSelect()
+    msg = json.dumps(msg)
+    return msg
+
+@app.route('/oneSelect' , methods=['GET', 'POST'])
+def oneSelectFn():
+    id = request.args.get('id')
+    msg = linkdb.oneSelect(id)
     msg = json.dumps(msg)
     return msg
 
@@ -129,6 +136,10 @@ def msgDelFn():
     linkdb.msgDel(id)
     return "删除成功"
     
+@app.route('/content' , methods=['GET', 'POST'])
+def contentFn():
+    id = request.args.get('id')
+    return render_template("content.html")
 
 def get_news(publication):
     feed = feedparser.parse(RSS_FEED[publication])

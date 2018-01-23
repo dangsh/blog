@@ -52,5 +52,16 @@ def msgSelect():
         print("select error")
 
     return allUsertables
-    # finally:
-    #     connection.close();
+
+def oneSelect(id):
+    allUsertables = []
+    try:
+        with connection.cursor() as cursor:
+            sql = 'select id , title , shortmsg , msg from blog1 where id =' + id
+            cursor.execute(sql);
+            for row in cursor.fetchall():
+                allUsertables.append(row)
+        connection.commit()
+    except:
+        print("select  one  error")
+    return allUsertables
