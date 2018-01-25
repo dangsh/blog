@@ -26,9 +26,6 @@ RSS_FEED = {"zhihu": "https://www.zhihu.com/rss",
             "k2" : "http://www.sciencenet.cn/xml/news-0.aspx?di=0" ,
             "k3" : "http://www.sciencenet.cn/xml/news-0.aspx?di=1" ,
             "k4" : "http://www.sciencenet.cn/xml/news-0.aspx?di=7" ,
-            "b1" : "http://news.baidu.com/n?cmd=1&class=civilnews&tn=rss" ,
-            "b2" : "http://news.baidu.com/n?cmd=1&class=internews&tn=rss" ,
-            "b3" : "http://news.baidu.com/n?cmd=1&class=mil&tn=rss" ,
             "souhu1" : "http://rss.news.sohu.com/rss/guonei.xml" ,
             "souhu2" : "http://rss.news.sohu.com/rss/guoji.xml"
             }
