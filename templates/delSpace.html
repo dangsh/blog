@@ -1,15 +1,24 @@
-{% extends "base.html" %} {% block content %}
-<div class="row" style="margin-top: 50px;">
+{% extends "base.html" %}{% block css %}
+<style type="text/css">
+	.btn {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		color: #778492;
+		font-size: 15px;
+	}
+</style>
+{% endblock %}{% block contentLeft %}
+<div class="row">
 	<div class="col-md-6">
-		<h2>原文字</h2>
+		<h3 style="margin-left: 40%;">原文字</h3>
 		<textarea id="text1" class="form-control myinput" rows="20" name=textarea></textarea>
 		<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
 		<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">完全去空格 &raquo;</a>
 		<a class="btn btn-default changeBtn2" href="#" role="button" style="margin-left: 10px;">保留单空格 &raquo;</a>
-		<a class="btn btn-default changeBtn3" href="#" role="button" style="margin-left: 10px;">删除多于一个的换行 &raquo;</a>
+		<a class="btn btn-default changeBtn3" href="#" role="button">删除多于一个的换行 &raquo;</a>
 	</div>
 	<div class="col-md-6">
-		<h2>删除空格</h2>
+		<h3 style="margin-left: 40%;">删除空格</h3>
 		<textarea id="text2" class="form-control myinput" rows="20" name=textarea></textarea>
 		<a class="btn btn-default copyBtn" href="#" role="button">复制内容</a>
 	</div>
@@ -17,9 +26,8 @@
 	<hr />
 
 </div>
-{% endblock %} {% block script %}
-<script src="../static/layer/layer.js"></script>
-
+{% endblock %}{% block script %}
+<script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 	$(".changeBtn").click(function() {
 		var text1 = $("#text1").val()

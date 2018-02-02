@@ -1,53 +1,52 @@
-{% extends "base.html" %}{% block content %}
+{% extends "base.html" %}{% block css %}
+<style type="text/css">
+	.btn {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		color: #778492;
+		font-size: 15px;
+	}
+</style>
+{% endblock %}{% block contentLeft %}
 <div class="row ">
-	<div class="col-md-3 " style="margin-top: 40px;">
-			<h2 class="form-signin-heading ">替换特定的字符</h2>
-			<h4 class="form-signin-heading ">输入被替换的字符</h4>
-			<input id="oldchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
-			
-	</div>
-	<div class="col-md-3 " style="margin-top: 40px;">
-			<h2 class="form-signin-heading ">|</h2>
-			<h4 class="form-signin-heading ">输入替换成的字符</h4>
-			<input id="newchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
-			
-	</div>
-</div>
-<div class="row " style="margin-top: 50px; ">
-	
+
 	<div class="col-md-6 ">
-		<h2>原文字</h2>
+		<h4 class="form-signin-heading ">输入被替换的字符</h4>
+		<input id="oldchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
+		<h3 style="margin-left: 40%;">原文字</h3>
 		<textarea id="text1 " class="form-control myinput " rows="20 " name=textarea></textarea>
 		<a class="btn btn-default clearBtn " href="# " role="button ">清空 </a>
 		<a class="btn btn-default changeOneBtn " href="# " role="button " style="margin-left: 10px; ">替换首个 &raquo;</a>
 		<a class="btn btn-default changeBtn " href="# " role="button " style="margin-left: 10px; ">完全替换 &raquo;</a>
 	</div>
+
 	<div class="col-md-6 ">
-		<h2>删除字符</h2>
+		<h4 class="form-signin-heading ">输入替换成的字符</h4>
+		<input id="newchar" type="text " name="username " class="form-control " required autofocus style="margin-top: 20px; ">
+		<h3 style="margin-left: 40%;">删除字符</h3>
 		<textarea id="text2 " class="form-control myoutput" rows="20 " name=textarea></textarea>
 		<a class="btn btn-default copyBtn " href="# " role="button ">复制内容</a>
 	</div>
 
-	<hr /> 
+	<hr />
 
 </div>
-{% endblock %} {% block script %}
-<script src="../static/layer/layer.js "></script>
-
+{% endblock %}{% block script %}
+<script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript ">
-	$(".changeOneBtn").click(function(){
+	$(".changeOneBtn").click(function() {
 		var text1 = $(".myinput").val()
 		var oldchar = $("#oldchar ").val()
 		var newchar = $("#newchar ").val()
 		text1 = text1.replace(oldchar, newchar);
 		document.getElementsByClassName('myoutput')[0].value = text1
 	})
-	$(".changeBtn").click(function(){
+	$(".changeBtn").click(function() {
 		var text1 = $(".myinput").val()
 		var oldchar = $("#oldchar ").val()
 		var newchar = $("#newchar ").val()
 		console.log(oldchar)
-		var text2 = text1.replace(new RegExp(oldchar,'g'),newchar);
+		var text2 = text1.replace(new RegExp(oldchar, 'g'), newchar);
 		document.getElementsByClassName('myoutput')[0].value = text2
 
 	})

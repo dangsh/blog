@@ -1,73 +1,68 @@
-{% extends "base.html" %} {% block content %}
-<div class="row row-offcanvas row-offcanvas-right">
-	<div class="col-xs-9 col-sm-9">
-		<p class="pull-right visible-xs">
-			<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-		</p>
-		<div class="jumbotron">
-			<h1>管理员界面</h1>
-			<p>It is my blog but is constructing still.</p>
-		</div>
-		<div class="row" id="contentdiv">
-		</div>
-	</div>
+{% extends "base.html" %}{% block contentLeft %}
 
-	<div class="col-xs-3 col-sm-3 sidebar-offcanvas" id="sidebar" style="margin-top: 100px;">
-		<div class="list-group">
-			<!--<a href="#" class="list-group-item active">Link</a>-->
-			<a href="/addmsg" class="list-group-item">添加文章</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
-			<a href="#" class="list-group-item">Link</a>
+<section class="latest section">
+	<div class="section-inner">
+		<!--<h2 class="heading">简介</h2>-->
+		<div class="content">
+
+			<div class="item featured text-center">
+				<hr class="divider" />
+				<!--<h3 class="title"><a href="#website-templates/responsive-bootstrap-theme-for-products-velocity/" target="_blank">这个网站是dangsh的blog</a></h3>-->
+				<!--<p class="summary">用来记录python学习中遇到的问题，并且提供一些小工具</p>-->
+				<div class="featured-image">
+					<a href="#">
+						<img class="img-responsive project-image" src="../static/images/projects/project-featured.png" alt="project name" />
+					</a>
+					<div class="ribbon">
+						<div class="text">New</div>
+					</div>
+				</div>
+
+				<div class="desc text-left">
+					<p>blog记录了自己python学习中遇到的问题和解决</p>
+					<p>提供了一些小工具，如 去空格 , 字符替换 等</p>
+				</div>
+				<!--//desc-->
+			</div>
+			<!--//item-->
+
 		</div>
+		<!--//content-->
 	</div>
-	<!--/.sidebar-offcanvas-->
-</div>
-<!--/row-->
-{% endblock %} {% block script %}
+	<!--//section-inner-->
+</section>
+<!--//section-->
+
+{% endblock %} {% block contentRight %}
+<aside class="credits aside section">
+	<div class="section-inner">
+		<h2 class="heading">管理员工具</h2>
+		<div class="content">
+			<ul class="list-unstyled">
+				<li>
+					<a href="/addmsg"><i class="fa fa-lightbulb-o"></i> 添加博客</a>
+				</li>
+			</ul>
+		</div>
+		<!--//content-->
+	</div>
+	<!--//section-inner-->
+</aside>
+{% endblock %}{% block script %}
 <script type="text/javascript">
-	function msgDel(id){
-		$.ajax({
-			url: "http://localhost:5678/msgDel?id="+ id,
-			method:'get',
-			success: function(data) {
-				console.log(data)
-			},
-			error: function(msg) {
-				console.log("error:删除数据失败")
-			}
-		});
-	}
 	function loaddata() {
 		$.ajax({
 			url: "http://localhost:5678/msgSelect",
 			success: function(data) {
-				console.log(data)
 				jsonData = JSON.parse(data)
 				for(var a = 0; a < jsonData.length; a++) {
 					id = jsonData[a].id
 					title = jsonData[a].title
 					shortmsg = jsonData[a].shortmsg
 					msg = jsonData[a].msg
-					var ele = '<div id="' + id + '"  class="col-xs-12 col-lg-12"> <h2>' + title + '</h2> <p>' + shortmsg + ' </p> <p> <a class="btn btn-default" href="/content?id=' + id +'" role="button">查看详情 &raquo;</a> <a class="btn btn-default delBtn" href="#" role="button" id="delId">删除 &omega;</a></p> </div>'
-					$("#contentdiv").append(ele)
-					
-					
+					var el = '<section class="latest section ele' + id + '"> <div class="section-inner"> <div class="content"> <div class="item row"> <a class="col-md-4 col-sm-4 col-xs-12" href="/content?id=' + id + '" > <img class="img-responsive project-image" src="../static/images/projects/project-4.png" alt="project name" /> </a> <div class="desc col-md-8 col-sm-8 col-xs-12"> <h3 class="title"><a href="/content?id=' + id + '" >' + title + '</a></h3> <p>' + shortmsg + '</p> <p> <a class="more-link" href="/content?id=' + id + '" ><i class="fa fa-external-link"></i> 查看详情</a> </p><p> <a class="more-link" href="/msgDel?id=' + id + '" ><i class="fa fa-external-link"></i> 删除</a> </p> </div> <!--//desc--> </div> <!--//item--> </div> <!--//content--> </div> <!--//section-inner--></section>'
+					$(".primary").append(el)
 				}
-				$(".delBtn").click(function(){
-						console.log("-------")
-						console.log($(this).parents("div")[0])
-						var a = $(this).parents("div").attr("id")
-						console.log(a)
-						msgDel(a)
-						$(this).parents("div")[0].remove()
-					})
-
 			},
 			error: function(msg) {
 				console.log("error:获取数据失败")
@@ -75,6 +70,5 @@
 		});
 	}
 	loaddata()
-	
 </script>
 {% endblock %}

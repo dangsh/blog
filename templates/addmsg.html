@@ -1,21 +1,65 @@
-{% extends "base.html" %} {% block content %}
-<div class="row row-offcanvas row-offcanvas-right">
+{% extends "base.html" %}{% block css %}
+<style type="text/css">
+	.btn {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		color: #778492;
+		font-size: 15px;
+	}
+</style>
+{% endblock %}{% block contentLeft %}
+<div class="row ">
 
-	<div class="col-xs-6 col-sm-6 col-xs-offset-3">
-		<div class="row">
-			<form class="form-signin" style="margin-top: 50px;" method="post" action="http://localhost:5678/msgAdd">
-				<h2 class="form-signin-heading">添加</h2>
-				<h4 class="form-signin-heading">嘀嘀嘀</h4> 标题：
-				<input type="text" name="title" class="form-control" required autofocus style="margin-top: 20px;"> 介绍：
-				<input type="text" name="shortmsg" class="form-control" required autofocus style="margin-top: 15px;">
-				<!--正文：<input type="text" name="msg" class="form-control" required autofocus style="margin-top: 15px;">-->
-				<textarea id="text2" class="form-control myinput" rows="20" name="msg" style="margin-top: 15px;"></textarea>
-				<button class="btn btn-lg btn-primary btn-block" type="submit" id="login" style="margin-top: 15px;">提交</button>
-			</form>
+	<form method="post" action="/msgAdd">
+		<div class="col-md-12 ">
+			<h4 class="form-signin-heading ">标题</h4>
+			<input id="oldchar" type="text " name="title" class="form-control " required autofocus style="margin-top: 20px; ">
+			<h4 class="form-signin-heading ">简介</h4>
+			<input id="oldchar" type="text " name="shortmsg" class="form-control " required autofocus style="margin-top: 20px; ">
+			<h4 style="margin-left: 47%;">内容</h4>
+			<textarea id="text1 " class="form-control myinput " rows="20 " name="msg"></textarea>
+			<!--<a class="btn btn-default clearBtn " type="submit" role="button ">提交 </a>-->
+			<button class="btn btn-default btn-block" type="submit" id="login" style="margin-top: 15px;">提交</button>
 		</div>
-		<!--/row-->
-	</div>
-</div>
-<!--/row-->
+	</form>
 
-{% endblock %} 
+	<hr />
+
+</div>
+{% endblock %}{% block script %}
+<script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript ">
+	$(".changeOneBtn").click(function() {
+		var text1 = $(".myinput").val()
+		var oldchar = $("#oldchar ").val()
+		var newchar = $("#newchar ").val()
+		text1 = text1.replace(oldchar, newchar);
+		document.getElementsByClassName('myoutput')[0].value = text1
+	})
+	$(".changeBtn").click(function() {
+		var text1 = $(".myinput").val()
+		var oldchar = $("#oldchar ").val()
+		var newchar = $("#newchar ").val()
+		console.log(oldchar)
+		var text2 = text1.replace(new RegExp(oldchar, 'g'), newchar);
+		document.getElementsByClassName('myoutput')[0].value = text2
+
+	})
+
+	$(".clearBtn ").click(function() {
+		document.getElementsByClassName('myoutput')[0].value = " "
+		document.getElementsByClassName('myinput')[0].value = " "
+	})
+
+	$(".copyBtn ").click(function() {
+		copyTextAreaCt()
+	})
+
+	function copyTextAreaCt() {
+		var oContent = document.getElementById("text2 ");
+		oContent.select(); // 选择对象
+		document.execCommand("Copy"); // 执行浏览器复制命令
+		layer.msg('复制成功');
+	}
+</script>
+{% endblock %}

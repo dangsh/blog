@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block css %}
+<link rel="stylesheet" href="../static/css/animate.css">
+<link rel="stylesheet" href="../static/css/style.css"> {% endblock %} {% block contentLeft %}
+<form action="#" class="fh5co-form animate-box" data-animate-effect="fadeIn">
+	<h2>忘记密码</h2>
+	<div class="form-group">
+		<div class="alert alert-success" role="alert">请填写您的邮箱，会向您的邮箱发送一封邮件</div>
+	</div>
+	<div class="form-group">
+		<label for="email" class="sr-only">EMAIL</label>
+		<input type="email" class="form-control" id="email" placeholder="邮箱地址" autocomplete="off">
+	</div>
+	<div class="form-group">
+		<p>
+			<a href="/login">登录</a> or
+			<a href="/sign">注册</a>
+		</p>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="发送邮件" class="btn btn-primary">
+	</div>
+</form>
+{% endblock %}{% block script %} {% endblock %}

@@ -1,25 +1,27 @@
-{% extends "base.html" %} {% block content %}
-<div class="row">
-
-	<div class="col-xs-6 col-sm-6 col-xs-offset-3">
-		<div class="row">
-			<form class="form-signin" style="margin-top: 200px;" method="post" action="http://localhost:5678/loginCheck">
-				<h2 class="form-signin-heading">登录</h2>
-				<h4 class="form-signin-heading">反正只有自己能看见,随便做做吧</h4>
-				<input type="text" name="username" class="form-control" required autofocus style="margin-top: 20px;">
-				<input type="text" name="password" class="form-control" required autofocus style="margin-top: 15px;">
-				<button class="btn btn-lg btn-primary btn-block" type="submit" id="login" style="margin-top: 15px;">登录</button>
-			</form>
-		</div>
-		<!--/row-->
+{% extends "base.html" %} {% block css %}
+<link rel="stylesheet" href="../static/css/animate.css">
+<link rel="stylesheet" href="../static/css/style.css"> {% endblock %} {% block contentLeft %}
+<form action="/loginCheck" class="fh5co-form animate-box" data-animate-effect="fadeIn" method="post">
+	<h2>登 录</h2>
+	<div class="form-group">
+		<label for="username" class="sr-only">Username</label>
+		<input type="text" name="username" class="form-control" id="username" placeholder="用户名" autocomplete="off">
 	</div>
-</div>
-<!--/row-->
-
-{% endblock %} {% block script %}
-<script type="text/javascript">
-	$("#login").click(function() {
-		console.log("aaaaaaa")
-	})
-</script>
-{% endblock %}
+	<div class="form-group">
+		<label for="password" class="sr-only">Password</label>
+		<input type="password" name="password" class="form-control" id="password" placeholder="密码" autocomplete="off">
+	</div>
+	<div class="form-group">
+		<label for="remember"><input type="checkbox" id="remember"> 记住账号 </label>
+	</div>
+	<div class="form-group">
+		<p>没有账号?
+			<a href="/sign">注册</a> |
+			<a href="/forgot">忘记密码?</a>
+		</p>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="登  录" class="btn btn-primary">
+	</div>
+</form>
+{% endblock %}{% block script %} {% endblock %}

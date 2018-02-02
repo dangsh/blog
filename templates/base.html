@@ -1,97 +1,141 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 	<head>
+		<title>Dangsh's</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-		<title>dangsh's</title>
-		<link href="../static/css/bootstrap.min.css" rel="stylesheet"> {% block css %}{% endblock %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Dangsh's">
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="../static/plugins/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../static/plugins/font-awesome/css/font-awesome.css">
+		<link id="theme-style" rel="stylesheet" href="../static/css/styles.css"> {% block css %}{% endblock %}
 	</head>
 
 	<body>
-		<nav class="navbar navbar-fixed-top navbar-inverse">
+		<!-- ******HEADER****** -->
+		<header class="header">
 			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="../">dangsh's</a>
-				</div>
-				<div id="navbar" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav activeUl">
+				<a href="/"><img class="profile-image img-responsive pull-left" src="../static/images/profile.png" /></a>
+				<div class="profile-content pull-left">
+					<h1 class="name">Dangsh</h1>
+					<h2 class="desc">Python Developer</h2>
+					<ul class="social list-inline">
 						<li>
-							<a href="/">Home</a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
 						</li>
 						<li>
-							<a href="/about">About</a>
+							<a href="#"><i class="fa fa-google-plus"></i></a>
 						</li>
 						<li>
-							<a href="#contact">Contact</a>
+							<a href="#"><i class="fa fa-linkedin"></i></a>
 						</li>
 						<li>
-							<a href="/top">Headlines</a>
+							<a href="http://www.github.com/dangsh" target="_blank"><i class="fa fa-github-alt"></i></a>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href="/delSpace">DelSpace</a>
-								</li>
-								<li>
-									<a href="/delChar">delChar</a>
-								</li>
-								<li>
-									<a href="/music">Music</a>
-								</li>
-								<li role="separator" class="divider"></li>
-								<li class="dropdown-header">Empty Tools</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-								<li>
-									<a href="#">Empty Tools</a>
-								</li>
-							</ul>
-						</li>
-
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="/login">Login</a>
+						<li class="last-item">
+							<a href="#"><i class="fa fa-hacker-news"></i></a>
 						</li>
 					</ul>
 				</div>
-				<!-- /.nav-collapse -->
+				<!--//profile-->
+				<a class="btn btn-cta-primary pull-right" href="/login"><i class="fa fa-paper-plane"></i> 登 录 </a>
+				<a class="btn btn-cta-primary pull-right" href="/sign"><i class="fa fa-paper-plane"></i> 注 册 </a>
 			</div>
-			<!-- /.container -->
-		</nav>
-		<!-- /.navbar -->
+			<!--//container-->
+		</header>
+		<!--//header-->
+		<div class="container sections-wrapper">
+			<div class="row">
+				<div class="primary col-md-8 col-sm-12 col-xs-12">
+					{% block contentLeft %}{% endblock %}
+				</div>
+				<!--//primary-->
+				<div class="secondary col-md-4 col-sm-12 col-xs-12">
+					<aside class="info aside section">
+						<div class="section-inner">
+							<h2 class="heading sr-only">Basic Information</h2>
+							<div class="content">
+								<ul class="list-unstyled">
+									<li style="font-family: 'Montserrat', sans-serif; font-weight: 700 ; color: #778492 ;"><i class="fa fa-map-marker"></i><span class="sr-only">Location:</span>郑州, 中国</li>
+									<li><i class="fa fa-envelope-o"></i><span class="sr-only">Email:</span>
+										<a href="#">dang_sh@126.com</a>
+									</li>
+									<li><i class="fa fa-link"></i><span class="sr-only">Website:</span>
+										<a href="http://www.dangsh.top" target="_blank">http://www.dangsh.top</a>
+									</li>
+								</ul>
+							</div>
+							<!--//content-->
+						</div>
+						<!--//section-inner-->
+					</aside>
+					<!--//aside-->
+					<aside class="credits aside section">
+						<div class="section-inner">
+							<h2 class="heading">工具</h2>
+							<div class="content">
+								<ul class="list-unstyled">
+									<li>
+										<a href="/messageboard"><i class="fa fa-legal"></i> 留言板 ，留下你想说的</a>
+									</li>
+									<li>
+										<a href="/delSpace"><i class="fa fa-legal"></i> 删除空格及换行符</a>
+									</li>
+									<li>
+										<a href="/delChar"><i class="fa fa-legal"></i> 自定义字符替换</a>
+									</li>
 
-		<div class="container">
-			<!--内容区域-->
-			{% block content %}{% endblock %}
+								</ul>
+							</div>
+							<!--//content-->
+						</div>
+						<!--//section-inner-->
+					</aside>
+					<!--//section-->
+					<aside class="credits aside section">
+						<div class="section-inner">
+							<h2 class="heading">热门文章推荐</h2>
+							<div class="content">
+								<ul class="list-unstyled">
+									<li>
+										<a href="#"><i class="fa fa-hand-o-up"></i> 震惊，光天华日</a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-hand-o-up"></i> 令人发指</a>
+									</li>
+									<li>
+										<a href="#"><i class="fa fa-hand-o-up"></i> 微信公众号</a>
+									</li>
+								</ul>
+							</div>
+							<!--//content-->
+						</div>
+						<!--//section-inner-->
+					</aside>
+					<!--//section-->
+					{% block contentRight %}{% endblock %}
+				</div>
+				<!--//secondary-->
+			</div>
+			<!--//row-->
 		</div>
-		<!--/.container-->
-		<script src="../static/js/jquery.min.js"></script>
-		<script src="../static/js/bootstrap.min.js"></script>
-		<script type="text/javascript">
-			$('.activeUl').find('a').each(function() {
-				if(this.href == document.location.href) {
-					$(this).parent().addClass('active');
-				}
-			});
-		</script>
-		<script type="text/javascript">
-			$('.dropdown-menu').find('a').each(function() {
-				if(this.href == document.location.href) {
-					$(this).parent().addClass('active');
-					$(this).parents(".dropdown").addClass('active');
-				}
-			});
-		</script>
+		<!--//masonry-->
+		<!-- ******FOOTER****** -->
+		<footer class="footer">
+			<div class="container text-center">
+				<small class="copyright">Design by dangsh 2018</small>
+			</div>
+			<!--//container-->
+		</footer>
+		<!--//footer-->
+		<!-- Javascript -->
+		<script type="text/javascript" src="../static/plugins/jquery.js"></script>
+		<script type="text/javascript" src="../static/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<!-- custom js -->
+		<script type="text/javascript" src="../static/js/main.js"></script>
 		{% block script %}{% endblock %}
-
 	</body>
 
 </html>
