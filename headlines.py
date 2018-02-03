@@ -29,6 +29,9 @@ def delSpaceFn():
 def delCharFn():
     return render_template("delChar.html")
 
+@app.route('/color')
+def colorFn():
+    return render_template("color.html")
 
 @app.route('/base')
 def baseFn():
