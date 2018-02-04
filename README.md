@@ -17,10 +17,8 @@ MySQL 5.7
 ## 目录结构描述 <br/>
 ├── static                      // js,css等静态资源 <br/>
 ├── templates                   // 放置html模板 <br/>
-├── uploadFile                  // 放置上传的文件 <br/>
 ├── headlines.py                // 项目主文件 <br/>
 ├── linkdb.py                   // 用于连接数据库及进行数据库操作 <br/>
-├── song.py                     // 用于实现搜索歌曲功能 <br/>
 └── README.md                   // 帮助文档 <br/>
 
 ## V0.0.1 版本内容
