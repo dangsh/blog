@@ -23,9 +23,7 @@
 				<div class="section-inner" style="background-color: green;">
 					
 				</div>
-				<!--//section-inner-->
 			</section>
-			<!--//section-->
 		</div>
 	</div>
 
@@ -51,37 +49,38 @@
 {% endblock %}{% block script %}
 <script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript ">
-	$(".changeOneBtn").click(function() {
-		var text1 = $(".myinput").val()
-		var oldchar = $("#oldchar ").val()
-		var newchar = $("#newchar ").val()
-		text1 = text1.replace(oldchar, newchar);
-		document.getElementsByClassName('myoutput')[0].value = text1
+	$(".LchangeRgb").click(function() {
+		var text1 = $("#rgbtext").val()
+		console.log(text1)
+		var re = /^[rR][gG][Bb][\(]((2[0-4][0-9]|25[0-5]|[01]?[0-9][0-9]?),){2}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)[\)]{1}$/
+		console.log(re.test(text1))
+		if(re.test(text1)){
+			var ele = '<section class="latest section"> <div class="section-inner" style="background-color: ' + text1 + ';"> </div> </section>'
+			$("#lColorDiv").append(ele)
+		}else{
+			layer.msg('请输入正确的RGB颜色');
+		}
+		
 	})
-	$(".changeBtn").click(function() {
-		var text1 = $(".myinput").val()
-		var oldchar = $("#oldchar ").val()
-		var newchar = $("#newchar ").val()
-		console.log(oldchar)
-		var text2 = text1.replace(new RegExp(oldchar, 'g'), newchar);
-		document.getElementsByClassName('myoutput')[0].value = text2
-
+	$(".RchangeRgb").click(function() {
+		var text2 = $("#sixteentext").val()
+		console.log(text2)
+		var re = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/
+		if(re.test(text2)){
+			var ele = '<section class="latest section"> <div class="section-inner" style="background-color: ' + text2 + ';"> </div> </section>'
+			$("#rColorDiv").append(ele)
+		}else{
+			layer.msg('请输入正确的十六进制颜色');
+		}
+		
 	})
 
-	$(".clearBtn ").click(function() {
-		document.getElementsByClassName('myoutput')[0].value = " "
-		document.getElementsByClassName('myinput')[0].value = " "
+	$(".LclearRgb ").click(function() {
+		document.getElementById("rgbtext").value = ""
 	})
 
-	$(".copyBtn ").click(function() {
-		copyTextAreaCt()
+	$(".RclearRgb ").click(function() {
+		document.getElementById("sixteentext").value = ""
 	})
-
-	function copyTextAreaCt() {
-		var oContent = document.getElementById("text2 ");
-		oContent.select(); // 选择对象
-		document.execCommand("Copy"); // 执行浏览器复制命令
-		layer.msg('复制成功');
-	}
 </script>
 {% endblock %}
