@@ -50,6 +50,7 @@
 
 	function getPage() {
 		$.ajax({
+			async:false,
 			url: "http://localhost:5678/msgSelect",
 			type: 'POST',
 			success: function(data) {
@@ -61,11 +62,11 @@
 		});
 	}
 	getPage()
-
 	function loaddata() {
 
 		$.ajax({
 			url: "http://localhost:5678/msgSelect?page=" + thispage,
+			async:false,
 			success: function(data) {
 				$(".myContent").empty()
 				jsonData = JSON.parse(data)
@@ -82,10 +83,11 @@
 					$(".sb").twbsPagination("destroy")
 				}
 
-				$(".sb").empty()
+//				$(".sb").empty()
 				isFirst = 0
-
+				
 				createPageNav('.sb', pageNum, function(event, page) {
+					
 					thispage = page;
 					isFirst++
 					if(isFirst > 1) {
@@ -104,7 +106,6 @@
 	loaddata()
 
 	function createPageNav(selec, totalPages, cbFn) {
-
 		$(selec).twbsPagination({
 			totalPages: totalPages,
 			first: "首页",
