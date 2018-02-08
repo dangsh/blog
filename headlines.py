@@ -79,9 +79,16 @@ def msgAddFn():
 
 @app.route('/msgSelect' , methods=['GET', 'POST'])
 def msgSelectFn():
-    msg = linkdb.msgSelect()
-    msg = json.dumps(msg)
-    return msg
+    if request.method == "GET":
+        page = request.args.get('page')
+        print(page)
+        msg = linkdb.msgSelect(page)
+        msg = json.dumps(msg)
+        return msg
+    else:
+        num = linkdb.msgPageSelect()
+        num = json.dumps(num)
+        return num
 
 @app.route('/oneSelect' , methods=['GET', 'POST'])
 def oneSelectFn():

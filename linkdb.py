@@ -39,19 +39,33 @@ def msgDel(id):
     except:
         print("add error")
 
-def msgSelect():
+def msgSelect(page):
     allUsertables = []
     try:
         with connection.cursor() as cursor:
-            sql = 'select id , title , shortmsg , msg from blog1'
+            sql = 'select id , title , shortmsg , msg from blog1 limit '+ str((int(page)-1)*10) +',10'
             cursor.execute(sql);
             for row in cursor.fetchall():
                 allUsertables.append(row)
         connection.commit()
     except:
         print("select error")
-
     return allUsertables
+
+def msgPageSelect():
+    num = 0
+    try:
+        with connection.cursor() as cursor:
+            sql = 'select count("id") from blog1'
+            cursor.execute(sql);
+            page = cursor.fetchall()
+            for k,v in page[0].items():
+                num = v
+        connection.commit()
+    except:
+        print("select error")
+    return num
+    
 
 def oneSelect(id):
     allUsertables = []
@@ -65,3 +79,6 @@ def oneSelect(id):
     except:
         print("select  one  error")
     return allUsertables
+
+if __name__ == "__main__":
+    msgPageSelect()

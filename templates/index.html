@@ -6,8 +6,7 @@
 		color: #778492;
 	}
 </style>
-{% endblock %}{% block contentLeft %}
-
+{% endblock %} {% block contentLeftTop %}
 <section class="latest section">
 	<div class="section-inner">
 		<!--<h2 class="heading">简介</h2>-->
@@ -40,45 +39,61 @@
 	<!--//section-inner-->
 </section>
 <!--//section-->
-
-{% endblock %} {% block contentRight %} {% endblock %}{% block script %}
+{% endblock %} {% block contentLeft %} {% endblock %} {% block contentRight %} {% endblock %}{% block script %}
 <script src="../static/js/jquery.twbsPagination.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-	var pageNum=1
+	var dataNum = 0
+	var pageNum = 1
 	var thispage = 1
-	function getPage(){
+	var isFirst = 0
+	var isChuangjianguoi = false
+
+	function getPage() {
 		$.ajax({
 			url: "http://localhost:5678/msgSelect",
+			type: 'POST',
 			success: function(data) {
-				jsonData = JSON.parse(data)
-				pageNum=Math.ceil(parseInt(jsonData.length) / 10)
+				dataNum = data
 			},
 			error: function(msg) {
-				console.log("error:获取页数失败")
+				console.log("error:获取数据失败")
 			}
 		});
 	}
 	getPage()
-	
+
 	function loaddata() {
+
 		$.ajax({
-			url: "http://localhost:5678/msgSelect",
+			url: "http://localhost:5678/msgSelect?page=" + thispage,
 			success: function(data) {
-				$(".primary").children("section").remove()
-//				$(".primary").twbsPagination("destroy") //销毁分页栏
+				$(".myContent").empty()
 				jsonData = JSON.parse(data)
-				pageData = jsonData.slice(0,9)
-				for(var a = 0; a < pageData.length; a++) {
-					id = pageData[a].id
-					title = pageData[a].title
-					shortmsg = pageData[a].shortmsg
-					msg = pageData[a].msg
-					var el = '<section class="latest section ele' + id + '"> <div class="section-inner"> <div class="content"> <div class="item row"> <a class="col-md-4 col-sm-4 col-xs-12" href="/content?id=' + id + '" > <img class="img-responsive project-image" src="../static/images/projects/project-4.png" alt="project name" /> </a> <div class="desc col-md-8 col-sm-8 col-xs-12"> <h3 class="title"><a href="/content?id=' + id + '" >' + title + '</a></h3> <p class="mycontent">' + shortmsg + '</p> <p> <a class="more-link" href="/content?id=' + id + '" ><i class="fa fa-external-link"></i> Find out more</a> </p> </div> <!--//desc--> </div> <!--//item--> </div> <!--//content--> </div> <!--//section-inner--></section>'
-					$(".primary").append(el)
+				pageNum = Math.ceil(parseInt(dataNum) / 10)
+				for(var a = 0; a < jsonData.length; a++) {
+					id = jsonData[a].id
+					title = jsonData[a].title
+					shortmsg = jsonData[a].shortmsg
+					msg = jsonData[a].msg
+					var el = '<section class="latest section mysection  ele' + id + '"> <div class="section-inner"> <div class="content"> <div class="item row"> <a class="col-md-4 col-sm-4 col-xs-12" href="/content?id=' + id + '" > <img class="img-responsive project-image" src="../static/images/projects/project-4.png" alt="project name" /> </a> <div class="desc col-md-8 col-sm-8 col-xs-12"> <h3 class="title"><a href="/content?id=' + id + '" >' + title + '</a></h3> <p class="mycontent">' + shortmsg + '</p> <p> <a class="more-link" href="/content?id=' + id + '" ><i class="fa fa-external-link"></i> Find out more</a> </p> </div> <!--//desc--> </div> <!--//item--> </div> <!--//content--> </div> <!--//section-inner--></section>'
+					$(".myContent").append(el)
 				}
-				createPageNav('.primary' , pageNum , function(event , page){
-			    	thispage = page
-			    	loaddata()
+				if($(".sb").twbsPagination) {
+					$(".sb").twbsPagination("destroy")
+				}
+
+				$(".sb").empty()
+				isFirst = 0
+
+				createPageNav('.sb', pageNum, function(event, page) {
+					thispage = page;
+					isFirst++
+					if(isFirst > 1) {
+						loaddata();
+					} else {
+
+					}
+
 				});
 			},
 			error: function(msg) {
@@ -86,25 +101,23 @@
 			}
 		});
 	}
-	$(".primary").twbsPagination("destroy") //销毁分页栏
 	loaddata()
-	console.log(thispage)
-	// 创建分页
+
 	function createPageNav(selec, totalPages, cbFn) {
+
 		$(selec).twbsPagination({
 			totalPages: totalPages,
 			first: "首页",
 			last: "尾页",
 			prev: '上一页',
 			next: '下一页',
-			startPage: 1,
-			visiblePages: totalPages > 5 ? 5 : totalPages , 
+			startPage: thispage,
+			visiblePages: totalPages > 5 ? 5 : totalPages,
 			version: '1.1',
 			onPageClick: function(event, page) {
 				cbFn(event, page)
 			}
 		});
 	}
-	
 </script>
 {% endblock %}
