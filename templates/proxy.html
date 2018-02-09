@@ -1,0 +1,56 @@
+{% extends "base.html" %}{% block css %}
+<style type="text/css">table {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	color: #778492;
+	text-align: center;
+	background-color: #D9EDF7;
+}</style>
+{% endblock %}{% block contentLeft %}
+	
+<section class="latest section">
+	<h4 class="form-signin-heading ">在这里为大家提供免费的IP代理，需要API接口的点<a href="http://www.baidu.com">这里</a></h4>
+	<div class="section-inner">
+		<!--<h2 class="heading">简介</h2>-->
+		<div class="content">
+			<table class="table table-bordered">
+				<tr>
+				  <td>ip</td>
+				  <td>port</td>
+				  <td>地区</td>
+				  <td>速度</td>
+				  <td>评分</td>
+				</tr>
+				<tr>
+				  <td>...</td>
+				  <td>...</td>
+				  <td>...</td>
+				  <td>...</td>
+				  <td>...</td>
+				</tr>
+			</table>
+			
+		</div>
+		<!--//content-->
+	</div>
+	<!--//section-inner-->
+</section>
+<!--//section-->
+{% endblock %}{% block script %}
+<script type="text/javascript">
+	function loadProxy() {
+		$.ajax({
+			async:false,
+			url: "http://localhost:5678/getProxy",
+			type: 'POST',
+			success: function(data) {
+				console.log(data)
+			},
+			error: function(msg) {
+				console.log("error:获取数据失败")
+			}
+		});
+	}
+	loadProxy()
+</script>
+{% endblock %}

@@ -63,7 +63,16 @@ def signFn():
 def messageboardFn():
     return render_template("messageBoard.html")
 
+@app.route('/proxy')
+def proxyFn():
+    return render_template("proxy.html")
 
+@app.route('/getProxy' , methods=['GET' , 'POST'])
+def getProxyFn():
+    msg = linkdb.selectProxy()
+    # msg = json.dumps(msg)
+    msg = str(msg)
+    return msg
 
 @app.route('/addmsg' , methods=['GET' , 'POST'])
 def addmsgFn():

@@ -70,7 +70,7 @@
 			success: function(data) {
 				$(".myContent").empty()
 				jsonData = JSON.parse(data)
-				pageNum = Math.ceil(parseInt(dataNum) / 10)
+				pageNum = Math.ceil(parseInt(dataNum) / 5)
 				for(var a = 0; a < jsonData.length; a++) {
 					id = jsonData[a].id
 					title = jsonData[a].title

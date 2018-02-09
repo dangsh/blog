@@ -43,7 +43,7 @@ def msgSelect(page):
     allUsertables = []
     try:
         with connection.cursor() as cursor:
-            sql = 'select id , title , shortmsg , msg from blog1 limit '+ str((int(page)-1)*10) +',10'
+            sql = 'select id , title , shortmsg , msg from blog1 limit '+ str((int(page)-1)*5) +',5'
             cursor.execute(sql);
             for row in cursor.fetchall():
                 allUsertables.append(row)
@@ -79,6 +79,20 @@ def oneSelect(id):
     except:
         print("select  one  error")
     return allUsertables
+
+def selectProxy():
+    allProxy = []
+    try:
+        with connection.cursor() as cursor:
+            sql = 'select ip , port , area , speed , score  from proxy where score = 10'
+            cursor.execute(sql);
+            for row in cursor.fetchall():
+                allProxy.append(row)
+        connection.commit()
+    except:
+        print("select  proxy  error")
+    print(allProxy)
+    return allProxy
 
 if __name__ == "__main__":
     msgPageSelect()
