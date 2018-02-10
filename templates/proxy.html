@@ -9,7 +9,8 @@
 {% endblock %}{% block contentLeft %}
 	
 <section class="latest section">
-	<h4 class="form-signin-heading ">在这里为大家提供免费的IP代理，需要API接口的点<a href="http://www.baidu.com">这里</a></h4>
+	<h4 class="form-signin-heading ">在这里为大家提供免费的IP代理，需要API接口的点<a href="/getProxy?score=10">这里</a></h4>
+	<h5>请求方式为GET , 参数score是代理的评分。有两个选择，10 , other</h5>
 	<div class="section-inner">
 		<!--<h2 class="heading">简介</h2>-->
 		<div class="content">
@@ -20,13 +21,6 @@
 				  <td>地区</td>
 				  <td>速度</td>
 				  <td>评分</td>
-				</tr>
-				<tr>
-				  <td>...</td>
-				  <td>...</td>
-				  <td>...</td>
-				  <td>...</td>
-				  <td>...</td>
 				</tr>
 			</table>
 			
@@ -40,11 +34,20 @@
 <script type="text/javascript">
 	function loadProxy() {
 		$.ajax({
-			async:false,
 			url: "http://localhost:5678/getProxy",
 			type: 'POST',
 			success: function(data) {
-				console.log(data)
+				jsonData = JSON.parse(data)
+				console.log(jsonData)
+				for(var a = 0; a < jsonData.length; a++) {
+					ip = jsonData[a].ip
+					port = jsonData[a].port
+					area = jsonData[a].area
+					speed = jsonData[a].speed
+					score = jsonData[a].score
+					var el = '<tr> <td>' + ip + '</td> <td>' + port + '</td> <td>' + area + '</td> <td>'+ speed +'</td> <td>' + score +'</td> </tr>'
+					$(".table").append(el)
+				}
 			},
 			error: function(msg) {
 				console.log("error:获取数据失败")

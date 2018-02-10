@@ -69,10 +69,21 @@ def proxyFn():
 
 @app.route('/getProxy' , methods=['GET' , 'POST'])
 def getProxyFn():
-    msg = linkdb.selectProxy()
-    # msg = json.dumps(msg)
-    msg = str(msg)
-    return msg
+    if request.method == "POST":
+        msg = linkdb.selectProxy()
+        msg = json.dumps(msg)
+        return msg
+    if request.method == "GET":
+        score = request.args.get('score')
+        if score == '10':
+            msg = linkdb.selectGoodProxy()
+            msg = json.dumps(msg)
+        elif score == 'other':
+            msg = linkdb.selectAllProxy()
+            msg = json.dumps(msg)
+        else:
+            pass
+        return msg
 
 @app.route('/addmsg' , methods=['GET' , 'POST'])
 def addmsgFn():

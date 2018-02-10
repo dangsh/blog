@@ -84,6 +84,19 @@ def selectProxy():
     allProxy = []
     try:
         with connection.cursor() as cursor:
+            sql = 'select ip , port , area , speed , score  from proxy where score = 10 limit 20'
+            cursor.execute(sql);
+            for row in cursor.fetchall():
+                allProxy.append(row)
+        connection.commit()
+    except:
+        print("select  proxy  error")
+    return allProxy
+
+def selectGoodProxy():
+    allProxy = []
+    try:
+        with connection.cursor() as cursor:
             sql = 'select ip , port , area , speed , score  from proxy where score = 10'
             cursor.execute(sql);
             for row in cursor.fetchall():
@@ -91,7 +104,19 @@ def selectProxy():
         connection.commit()
     except:
         print("select  proxy  error")
-    print(allProxy)
+    return allProxy
+
+def selectAllProxy():
+    allProxy = []
+    try:
+        with connection.cursor() as cursor:
+            sql = 'select ip , port , area , speed , score  from proxy'
+            cursor.execute(sql);
+            for row in cursor.fetchall():
+                allProxy.append(row)
+        connection.commit()
+    except:
+        print("select  proxy  error")
     return allProxy
 
 if __name__ == "__main__":
