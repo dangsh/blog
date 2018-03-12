@@ -1,0 +1,93 @@
+{% extends "base.html" %}{% block css %}
+<style type="text/css">
+	.btn {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		color: #778492;
+	}
+</style>
+{% endblock %}{% block contentLeft %}
+<div class="row">
+	<div class="col-md-6">
+		<h3 style="margin-left: 40%;">原文字</h3>
+		<textarea id="text1" class="form-control myinput" rows="20" name=textarea></textarea>
+		<a class="btn btn-default clearBtn" href="#" role="button">清空 </a>
+		<a class="btn btn-default changeBtn" href="#" role="button" style="margin-left: 10px;">转换 &raquo;</a>
+	</div>
+	<div class="col-md-6">
+		<h3 style="margin-left: 40%;">转化为字典格式</h3>
+		<textarea id="text2" class="form-control myinput" rows="20" name=textarea></textarea>
+		<a class="btn btn-default copyBtn" href="#" role="button">复制内容</a>
+	</div>
+
+	<hr />
+
+</div>
+{% endblock %}{% block script %}
+<script src="../static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(".changeBtn").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+//		text1 = text1.replace(/\r\n/g, "")
+//		text1 = text1.replace(/\n/g, "");
+//		//替换所有的空格（中文空格、英文空格都会被替换）
+//		text1 = text1.replace(/\s/g, "");
+//		document.getElementById('text2').value = text1
+		var array = text1.split("\n");
+		var nums = [ ];
+		for (var i=0 ; i< array.length ; i++)
+		{
+//		    nums.push(array[i]);
+			temp = array[i].split(":");
+			
+		}
+		console.log(nums);
+				
+		
+	})
+
+	$(".changeBtn2").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+		text1 = text1.replace(/\r\n/g, "")
+		text1 = text1.replace(/\n/g, "");
+		//替换多于一个的空格（中文空格、英文空格都会被替换）
+		text1 = text1.replace(/\s+/g, ' ');
+		document.getElementById('text2').value = text1
+	})
+
+	$(".changeBtn3").click(function() {
+		var text1 = $("#text1").val()
+		//替换所有的换行符
+		text1 = text1.replace(/\r+\n+/g, "\r")
+		text1 = text1.replace(/\n+/g, "\n");
+		document.getElementById('text2').value = text1
+	})
+
+	$(".clearBtn").click(function() {
+		document.getElementById('text1').value = ""
+		document.getElementById('text2').value = ""
+	})
+
+	$(".copyBtn").click(function() {
+		copyTextAreaCt()
+	})
+
+	function copyTextAreaCt() {
+		var oContent = document.getElementById("text2");
+		oContent.select(); // 选择对象
+		document.execCommand("Copy"); // 执行浏览器复制命令
+		layer.msg('复制成功');
+	}
+</script>
+{% endblock %}
+
+Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding:gzip, deflate, br
+Accept-Language:zh-CN,zh;q=0.9
+Connection:keep-alive
+Cookie:BAIDUID=6FA8701B31E0379D370B4F6CF13574B1:FG=1; PSTM=1519349167; BIDUPSID=ACBA587F71FC9BECAD73BA31B87C1AD9; BD_UPN=12314753; BDUSS=WJFR3k3Q3I3YXdFZDd3cW5lWG1oWW9GeUphQ1BsSE9lc1lTdTFWNmlsY2VXcmRhQVFBQUFBJCQAAAAAAAAAAAEAAAAL3-V73LfQwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB7Nj1oezY9aQ; MCITY=-%3A; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_645EC=ce935IOSPOynqn8VueWUXhnKrYOSsEKaDXeUGDnvW%2BdEoUsVX9WMCUFnBA4Px0BMIiFk; BD_HOME=1; H_PS_PSSID=25881_1460_21080_20719; sug=3; sugstore=0; ORIGIN=0; bdime=0
+Host:www.baidu.com
+Upgrade-Insecure-Requests:1
+User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36

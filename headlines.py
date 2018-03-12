@@ -66,6 +66,10 @@ def messageboardFn():
 @app.route('/proxy')
 def proxyFn():
     return render_template("proxy.html")
+    
+@app.route('/cookie')
+def cookieFn():
+    return render_template("cookie.html")
 
 @app.route('/getProxy' , methods=['GET' , 'POST'])
 def getProxyFn():
