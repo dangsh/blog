@@ -36,15 +36,41 @@
 //		document.getElementById('text2').value = text1
 		var array = text1.split("\n");
 		var nums = [ ];
+		var dic = new Array()
 		for (var i=0 ; i< array.length ; i++)
 		{
-//		    nums.push(array[i]);
+
 			temp = array[i].split(":");
+			var Cookie_index = 0
+			var x=0
+			for(x;x<temp.length;x++){
+//				console.log(temp[x])
+				if(temp[x] == "Cookie"){
+					console.log(temp[x])
+					console.log(x)
+				}	
+			}
+//			console.log(Cookie_index)
 			
+			for(var j=0;j<temp.length;j++)
+			{
+				if(j%2 == 0){
+					var key = temp[j]
+					dic[key] = "" 
+				}
+				if(j%2 != 0){
+					 for (var key in dic) {
+					 	if(dic[key] == ""){
+					 		dic[key] = temp[j]
+					 		continue
+					 	}
+			            
+			         }
+				}
+			}
 		}
-		console.log(nums);
-				
-		
+		console.log(dic)
+
 	})
 
 	$(".changeBtn2").click(function() {
