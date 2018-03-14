@@ -36,41 +36,14 @@
 //		document.getElementById('text2').value = text1
 		var array = text1.split("\n");
 		var nums = [ ];
-		var dic = new Array()
+		var my_str = "{"
 		for (var i=0 ; i< array.length ; i++)
 		{
-
 			temp = array[i].split(":");
-			var Cookie_index = 0
-			var x=0
-			for(x;x<temp.length;x++){
-//				console.log(temp[x])
-				if(temp[x] == "Cookie"){
-					console.log(temp[x])
-					console.log(x)
-				}	
-			}
-//			console.log(Cookie_index)
-			
-			for(var j=0;j<temp.length;j++)
-			{
-				if(j%2 == 0){
-					var key = temp[j]
-					dic[key] = "" 
-				}
-				if(j%2 != 0){
-					 for (var key in dic) {
-					 	if(dic[key] == ""){
-					 		dic[key] = temp[j]
-					 		continue
-					 	}
-			            
-			         }
-				}
-			}
+			my_str = my_str + "\"" + temp[0] + "\"" + ":" + "\"" + temp[1] + "\"" + "\n"
 		}
-		console.log(dic)
-
+		my_str = my_str + "}"
+		document.getElementById('text2').value = my_str
 	})
 
 	$(".changeBtn2").click(function() {
@@ -109,11 +82,3 @@
 </script>
 {% endblock %}
 
-Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
-Accept-Encoding:gzip, deflate, br
-Accept-Language:zh-CN,zh;q=0.9
-Connection:keep-alive
-Cookie:BAIDUID=6FA8701B31E0379D370B4F6CF13574B1:FG=1; PSTM=1519349167; BIDUPSID=ACBA587F71FC9BECAD73BA31B87C1AD9; BD_UPN=12314753; BDUSS=WJFR3k3Q3I3YXdFZDd3cW5lWG1oWW9GeUphQ1BsSE9lc1lTdTFWNmlsY2VXcmRhQVFBQUFBJCQAAAAAAAAAAAEAAAAL3-V73LfQwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB7Nj1oezY9aQ; MCITY=-%3A; BDORZ=B490B5EBF6F3CD402E515D22BCDA1598; H_PS_645EC=ce935IOSPOynqn8VueWUXhnKrYOSsEKaDXeUGDnvW%2BdEoUsVX9WMCUFnBA4Px0BMIiFk; BD_HOME=1; H_PS_PSSID=25881_1460_21080_20719; sug=3; sugstore=0; ORIGIN=0; bdime=0
-Host:www.baidu.com
-Upgrade-Insecure-Requests:1
-User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36
